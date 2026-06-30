@@ -2,12 +2,11 @@
 
 This repository contains the scripts and analysis workflow used to study associated production of a scalar in the Two Real Singlet Model:
 
-\[
-pp \rightarrow Vh_2 \rightarrow V(h_1h_1)
-           \rightarrow V(b\bar{b})(b\bar{b}),
-\]
+```text
+pp → Vh₂ → Vh₁h₁ → Vbb̄bb̄
+```
 
-where (V = W^\pm, Z). The repository includes scripts for ScannerS, HiggsTools, MadGraph5_aMC@NLO, Pythia, Delphes, MadAnalysis5, and Python-based event analysis.
+where **V = W± or Z**. The repository includes scripts for ScannerS, HiggsTools, MadGraph5_aMC@NLO, Pythia, Delphes, MadAnalysis5, and Python-based event analysis.
 
 ## Repository structure
 
