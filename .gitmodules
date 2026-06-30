@@ -1,0 +1,3 @@
+[submodule "UFO_and_ParamCard-generator/twosinglet-master"]
+	path = UFO_and_ParamCard-generator/twosinglet-master
+	url = https://gitlab.com/apapaefs/twosinglet.git
