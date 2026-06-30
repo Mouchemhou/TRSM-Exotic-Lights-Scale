@@ -2,9 +2,10 @@
 
 This repository contains the scripts and analysis workflow used to study associated production of a scalar in the Two Real Singlet Model:
 
-[
-pp \to V h_2,\qquad h_2 \to h_1 h_1 \to b\bar b b\bar b,
-]
+\[
+pp \rightarrow Vh_2 \rightarrow V(h_1h_1)
+           \rightarrow V(b\bar{b})(b\bar{b}),
+\]
 
 where (V = W^\pm, Z). The repository includes scripts for ScannerS, HiggsTools, MadGraph5_aMC@NLO, Pythia, Delphes, MadAnalysis5, and Python-based event analysis.
 
@@ -89,10 +90,6 @@ GitLab repository:
 ```text
 https://gitlab.com/apapaefs/twosinglet
 ```
-
-## Author
-
-Mohamed Ouchemhou
 
 
 
