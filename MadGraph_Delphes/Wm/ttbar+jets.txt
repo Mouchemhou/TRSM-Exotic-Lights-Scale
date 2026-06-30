@@ -1,0 +1,75 @@
+set nb_core 6
+import model sm-full 
+define l+=mu+ e+
+define l-=mu- e- 
+define vl=ve vm 
+define vl~=ve~ vm~
+define j = j b b~
+
+generate p p > t t~
+add process p p > t t~ j
+add process p p > t t~ j j
+
+output ttbar_jets2
+launch 
+
+shower=Pythia8 
+madspin=ON 
+detector=Delphes
+analysis=OFF
+
+set cut_decays True
+#set bwcutoff 10
+#set maxjetflavor 5
+#set use_syst True
+#set dynamical_scale_choice 3                                     # HT/2 scale choice
+
+set ptb 20.0                                                      # minimum pt for the b
+set ptl 10.0                                                      # minimum pt for the l
+set ptj 20.0                                                      # minimum pt for the j
+
+set etab 2.5                                                     # max rap for the b
+set etal 2.5                                                     # max rap for the l
+set etaj 2.5                                                     # max rap for the j
+
+set etabmin -2.5                                                 # min rap for the b
+set etalmin -2.5                                                 # min rap for the l
+set etajmin -2.5                                                 # min rap for the j
+
+set drbb 0.4                                                     # min distance between b, b
+set drbl 0.4                                                     # min distance between b, l
+set drjj 0.4                                                     # min distance between j, j
+set drbj 0.4                                                     # min distance between b, j
+set drjl 0.4                                                     # min distance between j, l
+
+
+set ickkw 1        # MLM matching
+set xqcut 30       # merging scale (25–35 typical)
+set qcut 35
+
+set ebeam1 6800
+set ebeam2 6800
+
+set pdlabel lhapdf
+set lhaid 230000
+
+set nevents 400000
+ 
+set mh 125.09
+set MT 173.0
+set ymt	173.0
+set MB	4.70
+set ymb 4.70 
+
+
+./delphes_cms.tcl
+
+
+set spinmode full
+set max_weight_ps_point 400
+
+decay t > w+ b, w+ > j j
+decay t~ > w- b~, w- > l- vl~
+
+set systematics_program systematics
+set systematics_arguments ['--pdf=errorset', '--dyn=-1,1,2,3','--mur=0.5,1,2','--muf=0.5,1,2', '--together=dyn,mur,muf'] 

@@ -1,0 +1,22 @@
+set nb_core 14 
+import model loop_sm_twoscalar --modelname 
+define l+=m+ e+ 
+define vl=ve vm 
+
+generate p p > b b~ b b~ l+ vl QCD=10 QED=10
+
+output BP6_full
+launch 
+shower=Pythia8 
+#madspin=ON 
+
+../generate_param_card2/mH_36_mEta_79.dat
+
+
+set ebeam1 6800
+set ebeam2 6800
+
+set pdlabel lhapdf
+set lhaid 230000
+
+set nevents 100000 

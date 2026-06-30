@@ -1,0 +1,36 @@
+set nb_core 14 
+import model loop_sm_twoscalar --modelname 
+define l+=m+ e+ 
+define l-=m- e- 
+define vl=ve vm 
+define vl~=ve~ vm~ 
+
+generate p p > h h w-, h > b b~, h > b b~, w- > l- vl~ QCD=10 QED=10
+output Sig_BP6
+
+launch 
+shower=Pythia8 
+madspin=ON 
+detector=Delphes
+analysis=OFF
+
+../generate_param_card2/mH_36_mEta_79.dat
+./delphes_cms.tcl
+
+set ebeam1 6800
+set ebeam2 6800
+
+set pdlabel lhapdf
+set lhaid 230000
+
+set nevents 200000 
+
+set spinmode none 
+set weta auto 
+set wiota auto 
+set wh auto 
+set ww auto 
+
+set sde_strategy 1 
+set systematics_program systematics
+set systematics_arguments ['--pdf=errorset', '--dyn=-1,1,2,3','--mur=0.5,1,2','--muf=0.5,1,2', '--together=dyn,mur,muf'] 

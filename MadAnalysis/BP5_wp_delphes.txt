@@ -1,0 +1,152 @@
+#set nb_core 32
+#set main.fastsim.package = delphes
+#set main.fastsim.detector = atlas
+#set main.fastsim.package = fastjet
+#set main.fastsim.algorithm = antikt
+#set main.lumi = 300.
+#set main.fastsim.radius = 0.4
+#set main.outputfile = output.lhe
+
+#set main.fastsim.package = delphes
+#set main.fastsim.detector = cms
+set main.stacking_method = normalize2one #superimpose
+set main.lumi = 300.
+set main.normalize = lumi
+set main.fom.formula = 6
+
+########## data Import #####
+import /home/mohamed/MG5_aMC_v3_5_5/Wp/Sig_BP5/Events/run_01_decayed_1/tag_1_delphes_events.root as BP5
+
+import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets0/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets1/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets2/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets3/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets4/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets5/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets6/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets7/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/ttbar_jets8/Events/run_01_decayed_1/tag_1_delphes_events.root as tt_lights
+
+import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets0/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets1/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets2/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets3/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets4/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+#import /home/mohamed/MG5_aMC_v3_5_5/Wp/Wjets5/Events/run_01_decayed_1/tag_1_delphes_events.root as Wlight
+
+
+
+set BP5.xsection = 0.02648
+set BP5.weighted_events = true
+
+set tt_lights.xsection = 89.78
+set tt_lights.weighted_events = true
+
+set Wlight.xsection = 475.3
+set Wlight.weighted_events = true
+
+
+set BP5.type = signal
+set tt_lights.type = background
+set Wlight.type = background
+
+
+################### Event selections for bp1
+#select MET <= 80.0                                                 ##Very Good Cuts
+#select THT <= 150.0                                                ##Good Cuts
+select N(b)>= 2 
+select N(l)==1                                                      ## Not good, fit it again. that the wort because it's required
+select N(j)==2
+
+select DELTAR(b, b) > 0.4 and DELTAR(b, b) <= 1.6                 ## good cuts             
+#select DELTAR(b, l) >= 2.5 and DELTAR(b, l) <= 3.5               ## good cuts, decrease significance
+#select DELTAR(j, j) > 0.4 and DELTAR(j, j) <= 1.2                 ## good cuts, decrease significance
+
+#select PT(b[1]) >= 20.0 and PT(b[1])<= 60.0                       ## Worst
+#select PT(b[2]) >= 20.0 and PT(b[2])<= 40.0                       ## Worst
+#select PT(j[1]) >= 20.0 and PT(j[1]) <= 70.0                      ## Worst
+#select PT(j[2]) >= 20.0 and PT(j[2]) <= 50.0                      ## Worst
+#select PT(l) >= 20.0 and PT(l) <= 60.0
+
+select M (b[1] b[2]) >= 20. and M (b[1] b[2]) <=90                  ## This decrase Sig to 2.44
+#select M (b[1] b[3]) >= 15. and M (b[1] b[3]) <=90                 ## should try them over large event
+#select M (b[2] b[3]) >= 15. and M (b[2] b[3]) <=90                 ## should try them over large event
+
+
+#select M (b[1] b[2] b[3]) >= 40. and M (b[1] b[2] b[3]) <= 120      ## should try them over large event
+#select M (b[1] b[2] b[4]) >= 30. and M (b[1] b[2] b[4]) <= 120      ## not good
+#select M (b[1] b[3] b[4]) >= 40. and M (b[1] b[3] b[4]) <= 120      ## not good
+#select M (b[2] b[3] b[4]) >= 40. and M (b[2] b[3] b[4]) <= 120      ## not good
+
+#select M (b[1] b[2] b[3] b[4]) >= 30. and M (b[1] b[2] b[3] b[4]) <= 120  # Worst
+
+#select MT_MET(b l) >= 180.0
+#select MT_MET(l) >= 20. and MT_MET(l) <= 110.
+## ===== Distributions's plot
+
+plot MET 25 0 500
+plot MHT 25 0 500
+
+plot TET 50 0 1000
+plot THT 50 0 1000
+
+plot N(b)
+plot N(l)
+plot N(j)
+
+plot DELTAR(b, b)
+plot DELTAR(l, l)
+plot DELTAR(b, l)
+plot DELTAR(b, j)
+plot DELTAR(j, j)
+plot DELTAR(j, l)
+
+
+plot PT(b[1]) 25 0 200 #[logY]
+plot PT(b[2]) 25 0 200 #[logY]
+plot PT(b[3]) 25 0 200 #[logY]
+plot PT(b[4]) 25 0 200 #[logY]
+
+plot PT(l[1]) 25 0 200 #[logY]
+
+plot PT(j[1]) 25 0 200 #[logY]
+plot PT(j[2]) 25 0 200 #[logY]
+
+plot M (b[1] b[2]) 20 0 160 #[logY]
+plot M (b[1] b[3]) 20 0 160 #[logY]
+plot M (b[1] b[4]) 20 0 160 #[logY]
+plot M (b[2] b[3]) 20 0 160 #[logY]
+plot M (b[2] b[4]) 20 0 160 #[logY]
+plot M (b[3] b[4]) 20 0 160 #[logY]
+
+
+plot M (b b j ) 20 0 300 #[logY]
+plot M (b b b ) 20 0 300 #[logY]
+plot M (b b b b) 20 0 300 #[logY]
+
+plot MT_MET(l) 25 0 120 #[logY]
+plot MT_MET(b l) 25 120 220 #[logY]
+
+
+set BP5.linecolor = red
+set BP5.linestyle = solid
+set BP5.linewidth = 2
+set BP5.title = "BP5"
+
+
+set tt_lights.linecolor = green
+set tt_lights.linestyle = solid
+set tt_lights.linewidth = 3
+set tt_lights.title = "ttjets"
+
+set Wlight.linecolor = blue
+set Wlight.linestyle = solid
+set Wlight.linewidth = 3
+set Wlight.title = "Wjets"
+
+
+submit BP5_rco_wp_ncuts
+exit
+
