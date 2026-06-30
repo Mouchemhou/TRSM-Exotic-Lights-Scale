@@ -6,7 +6,7 @@ This repository contains the scripts and analysis workflow used to study associa
 pp → Vh₂ → Vh₁h₁ → Vbb̄bb̄
 ```
 
-where **V = W± or Z**. The repository includes scripts for ScannerS, HiggsTools, MadGraph5_aMC@NLO, Pythia, Delphes, MadAnalysis5, and Python-based event analysis.
+where **V = W± or Z**. The repository includes scripts for ScannerS, HiggsTools, MadGraph5_aMC@NLO with Pythia and Delphes, MadAnalysis5, and Python-based event analysis.
 
 ## Repository structure
 
